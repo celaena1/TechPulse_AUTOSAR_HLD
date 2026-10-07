@@ -1,0 +1,310 @@
+[
+  {
+    "page": 1,
+    "text": "Vehicle Gateway Control System: High-Level\nDesign (HLD)\nDocument ID: VH-GW-HLD-002\nVersion: 2.0\nDocument Type: Synthetic High-Level Design Knowledge-Base Document\n1. Document Information and Ground-Truth Statement\n1.1 Document Information\n1.2 Ground-Truth Statement\nThis document is completely synthetic and self-contained. It is the only source of truth\nfor the Vehicle Gateway Control System. Any fact that is not stated in this document is\nnot specified in this HLD.\nThe Vehicle Gateway Control System contains exactly five primary Software\nComponents, exactly three primary Interfaces, exactly five explicit Signals, and exactly\nsix Port mappings.\nField\nValue\nDocument ID\nVH-GW-HLD-002\nVersion\n2.0\nSystem Name\nVehicle Gateway Control System\nDocument Purpose\nDefine the high-level software architecture of the\nVehicle Gateway Control System\nPrimary Communication Protocol\nController Area Network (CAN)\nSecondary Communication\nTechnology\nAutomotive Ethernet\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 1 of 13\n",
+    "headings": [
+      {
+        "text": "1. Document Information and Ground-Truth Statement",
+        "number": "1",
+        "title": "Document Information and Ground-Truth Statement"
+      },
+      {
+        "text": "1.1 Document Information",
+        "number": "1.1",
+        "title": "Document Information"
+      },
+      {
+        "text": "1.2 Ground-Truth Statement",
+        "number": "1.2",
+        "title": "Ground-Truth Statement"
+      }
+    ]
+  },
+  {
+    "page": 2,
+    "text": "1.3 Terminology\n1.4 Authoritative Sections\nSection 4 is the authoritative source for signal ownership (provider and consumer).\nSection 7 is the authoritative source for diagnostic scope boundaries.\n2. System Architecture\n2.1 System Overview\nThe Vehicle Gateway Control System is composed of exactly five primary Software\nComponents:\n1. SensorInterface\n2. VehicleControlComponent\n3. BrakeControlComponent\n4. DiagnosticManager\n5. CommunicationManager\nNo other Software Components are defined in this HLD.\nThe system has two functional flows:\nTerm\nMeaning in this HLD\nSoftware Component\nAn architectural unit of the system that owns ports\nand responsibilities\nInterface\nA named contract that groups one or more signals\nand defines a communication pattern\nPort\nA connection point of a Software Component. A\nProvided Port (PPort) provides an interface. A\nRequired Port (RPort) requires an interface\nSignal\nA named data element contained in an interface\nProvider\nThe Software Component that provides a signal\nConsumer\nThe Software Component that consumes a signal\nCommunication Protocol\nThe transport mechanism that carries signals\nbetween Software Components\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 2 of 13\n",
+    "headings": [
+      {
+        "text": "1.3 Terminology",
+        "number": "1.3",
+        "title": "Terminology"
+      },
+      {
+        "text": "1.4 Authoritative Sections",
+        "number": "1.4",
+        "title": "Authoritative Sections"
+      },
+      {
+        "text": "2. System Architecture",
+        "number": "2",
+        "title": "System Architecture"
+      },
+      {
+        "text": "2.1 System Overview",
+        "number": "2.1",
+        "title": "System Overview"
+      }
+    ]
+  },
+  {
+    "page": 3,
+    "text": "The primary control flow carries VehicleSpeed, EngineSpeed, and BrakeStatus from\nSensorInterface through VehicleControlComponent to BrakeControlComponent.\nThe diagnostic flow carries DiagnosticRequest and DiagnosticResponse between\nCommunicationManager and DiagnosticManager.\n2.2 Software Component Responsibilities\n2.2.1 SensorInterface\nSensorInterface is responsible for acquiring and normalizing physical vehicle sensor\ninformation. SensorInterface provides VehicleSpeed and EngineSpeed.\n2.2.2 VehicleControlComponent\nVehicleControlComponent processes vehicle-speed and engine-speed information and\ngenerates brake control status. VehicleControlComponent consumes VehicleSpeed and\nEngineSpeed. VehicleControlComponent provides BrakeStatus.\n2.2.3 BrakeControlComponent\nBrakeControlComponent consumes brake-related control and status information for\nvehicle deceleration actuation. BrakeControlComponent consumes BrakeStatus.\n2.2.4 DiagnosticManager\nDiagnosticManager processes diagnostic requests and generates diagnostic responses.\nDiagnosticManager consumes DiagnosticRequest. DiagnosticManager provides\nDiagnosticResponse.\n2.2.5 CommunicationManager\nCommunicationManager provides communication transport services for CAN and\nAutomotive Ethernet. CommunicationManager provides DiagnosticRequest to\nDiagnosticManager. CommunicationManager consumes DiagnosticResponse.\n3. Software Components and Ports\n3.1 Software Component List\nNo.\nSoftware Component\nRole Summary\n1\nSensorInterface\nAcquires and normalizes physical vehicle sensor\ninformation\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 3 of 13\n",
+    "headings": [
+      {
+        "text": "2.2 Software Component Responsibilities",
+        "number": "2.2",
+        "title": "Software Component Responsibilities"
+      },
+      {
+        "text": "2.2.1 SensorInterface",
+        "number": "2.2.1",
+        "title": "SensorInterface"
+      },
+      {
+        "text": "2.2.2 VehicleControlComponent",
+        "number": "2.2.2",
+        "title": "VehicleControlComponent"
+      },
+      {
+        "text": "2.2.3 BrakeControlComponent",
+        "number": "2.2.3",
+        "title": "BrakeControlComponent"
+      },
+      {
+        "text": "2.2.4 DiagnosticManager",
+        "number": "2.2.4",
+        "title": "DiagnosticManager"
+      },
+      {
+        "text": "2.2.5 CommunicationManager",
+        "number": "2.2.5",
+        "title": "CommunicationManager"
+      },
+      {
+        "text": "3. Software Components and Ports",
+        "number": "3",
+        "title": "Software Components and Ports"
+      },
+      {
+        "text": "3.1 Software Component List",
+        "number": "3.1",
+        "title": "Software Component List"
+      }
+    ]
+  },
+  {
+    "page": 4,
+    "text": "SensorInterface is a Software Component. It is not an Interface. The Software Component\nname SensorInterface must not be confused with the three Interfaces defined in Section\n4.\n3.2 Port Mapping\nThe Vehicle Gateway Control System defines exactly six ports. The mapping below is\ncomplete.\n3.3 Port Statements per Software Component\nSensorInterface owns one port: VehicleDataOut, a Provided Port (PPort) of\nVehicleDataInterface.\nVehicleControlComponent owns two ports: VehicleDataIn, a Required Port (RPort) of\nVehicleDataInterface, and BrakeStatusOut, a Provided Port (PPort) of\nBrakeStatusInterface.\nBrakeControlComponent owns one port: BrakeStatusIn, a Required Port (RPort) of\nBrakeStatusInterface.\nNo.\nSoftware Component\nRole Summary\n2\nVehicleControlComponent\nProcesses vehicle speed and engine speed and\ngenerates brake control status\n3\nBrakeControlComponent\nConsumes brake status for vehicle deceleration\nactuation\n4\nDiagnosticManager\nProcesses diagnostic requests and generates\ndiagnostic responses\n5\nCommunicationManager\nProvides transport services for CAN and\nAutomotive Ethernet\nSoftware Component\nPort\nDirection\nInterface\nSensorInterface\nVehicleDataOut\nProvided (PPort)\nVehicleDataInterface\nVehicleControlComponent\nVehicleDataIn\nRequired (RPort)\nVehicleDataInterface\nVehicleControlComponent\nBrakeStatusOut\nProvided (PPort)\nBrakeStatusInterface\nBrakeControlComponent\nBrakeStatusIn\nRequired (RPort)\nBrakeStatusInterface\nDiagnosticManager\nDiagnosticOut\nProvided (PPort)\nDiagnosticInterface\nCommunicationManager\nDiagnosticIn\nRequired (RPort)\nDiagnosticInterface\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 4 of 13\n",
+    "headings": [
+      {
+        "text": "3.2 Port Mapping",
+        "number": "3.2",
+        "title": "Port Mapping"
+      },
+      {
+        "text": "3.3 Port Statements per Software Component",
+        "number": "3.3",
+        "title": "Port Statements per Software Component"
+      }
+    ]
+  },
+  {
+    "page": 5,
+    "text": "DiagnosticManager owns one port: DiagnosticOut, a Provided Port (PPort) of\nDiagnosticInterface.\nCommunicationManager owns one port: DiagnosticIn, a Required Port (RPort) of\nDiagnosticInterface.\n3.4 Port Connections\nVehicleDataOut of SensorInterface is connected to VehicleDataIn of\nVehicleControlComponent through VehicleDataInterface.\nBrakeStatusOut of VehicleControlComponent is connected to BrakeStatusIn of\nBrakeControlComponent through BrakeStatusInterface.\nDiagnosticOut of DiagnosticManager is connected to DiagnosticIn of\nCommunicationManager through DiagnosticInterface.\nThe HLD defines no additional port for DiagnosticRequest. The six ports in Section 3.2 are\nthe complete port set.\n4. Interfaces and Signals\n4.1 Interface Definitions\nThe Vehicle Gateway Control System defines exactly three primary Interfaces.\n4.1.1 VehicleDataInterface\nVehicleDataInterface uses the Sender-Receiver communication pattern.\nVehicleDataInterface contains the signals VehicleSpeed and EngineSpeed. VehicleSpeed\nis contained in VehicleDataInterface. EngineSpeed is contained in VehicleDataInterface.\n4.1.2 BrakeStatusInterface\nBrakeStatusInterface uses the Sender-Receiver communication pattern.\nBrakeStatusInterface contains the signal BrakeStatus.\nInterface\nCommunication Pattern\nContained Signals\nVehicleDataInterface\nSender-Receiver\nVehicleSpeed, EngineSpeed\nBrakeStatusInterface\nSender-Receiver\nBrakeStatus\nDiagnosticInterface\nClient-Server / Sender-\nReceiver hybrid\nDiagnosticRequest,\nDiagnosticResponse\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 5 of 13\n",
+    "headings": [
+      {
+        "text": "3.4 Port Connections",
+        "number": "3.4",
+        "title": "Port Connections"
+      },
+      {
+        "text": "4. Interfaces and Signals",
+        "number": "4",
+        "title": "Interfaces and Signals"
+      },
+      {
+        "text": "4.1 Interface Definitions",
+        "number": "4.1",
+        "title": "Interface Definitions"
+      },
+      {
+        "text": "4.1.1 VehicleDataInterface",
+        "number": "4.1.1",
+        "title": "VehicleDataInterface"
+      },
+      {
+        "text": "4.1.2 BrakeStatusInterface",
+        "number": "4.1.2",
+        "title": "BrakeStatusInterface"
+      }
+    ]
+  },
+  {
+    "page": 6,
+    "text": "4.1.3 DiagnosticInterface\nDiagnosticInterface uses a Client-Server / Sender-Receiver hybrid communication\npattern. DiagnosticInterface contains the signals DiagnosticRequest and\nDiagnosticResponse.\n4.2 Explicit Signals\nThe Vehicle Gateway Control System defines exactly five explicit Signals.\n4.3 Normative Signal Provider / Consumer Relationships\nThis section is the authoritative source for signal ownership in VH-GW-HLD-002. If any\nother section appears to differ, this section takes precedence.\nThe relationships are restated as direct sentences:\nSensorInterface provides VehicleSpeed to VehicleControlComponent.\nVehicleControlComponent consumes VehicleSpeed.\nSensorInterface provides EngineSpeed to VehicleControlComponent.\nVehicleControlComponent consumes EngineSpeed.\nVehicleControlComponent provides BrakeStatus to BrakeControlComponent.\nSignal\nContained in Interface\nVehicleSpeed\nVehicleDataInterface\nEngineSpeed\nVehicleDataInterface\nBrakeStatus\nBrakeStatusInterface\nDiagnosticRequest\nDiagnosticInterface\nDiagnosticResponse\nDiagnosticInterface\nSignal\nProvider\nConsumer\nVehicleSpeed\nSensorInterface\nVehicleControlComponent\nEngineSpeed\nSensorInterface\nVehicleControlComponent\nBrakeStatus\nVehicleControlComponent\nBrakeControlComponent\nDiagnosticRequest\nCommunicationManager\nDiagnosticManager\nDiagnosticResponse\nDiagnosticManager\nCommunicationManager\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 6 of 13\n",
+    "headings": [
+      {
+        "text": "4.1.3 DiagnosticInterface",
+        "number": "4.1.3",
+        "title": "DiagnosticInterface"
+      },
+      {
+        "text": "4.2 Explicit Signals",
+        "number": "4.2",
+        "title": "Explicit Signals"
+      },
+      {
+        "text": "4.3 Normative Signal Provider / Consumer Relationships",
+        "number": "4.3",
+        "title": "Normative Signal Provider / Consumer Relationships"
+      }
+    ]
+  },
+  {
+    "page": 7,
+    "text": "BrakeControlComponent consumes BrakeStatus.\nCommunicationManager provides DiagnosticRequest to DiagnosticManager.\nDiagnosticManager consumes DiagnosticRequest.\nDiagnosticManager provides DiagnosticResponse to CommunicationManager.\nCommunicationManager consumes DiagnosticResponse.\n4.4 Signal Ownership Summary by Software Component\n5. Communication Architecture\n5.1 Primary Protocol: Controller Area Network (CAN)\nController Area Network (CAN) is the primary communication protocol of the Vehicle\nGateway Control System. CAN is the primary communication protocol for all five explicit\nHLD signals:\nVehicleSpeed\nEngineSpeed\nBrakeStatus\nDiagnosticRequest\nDiagnosticResponse\nCAN is the primary transport mechanism for VehicleSpeed. CAN is the primary transport\nmechanism for EngineSpeed. CAN is the primary transport mechanism for BrakeStatus.\nCAN is the primary transport mechanism for DiagnosticRequest. CAN is the primary\ntransport mechanism for DiagnosticResponse.\n5.2 Secondary Technology: Automotive Ethernet\nAutomotive Ethernet is the secondary communication technology of the Vehicle Gateway\nControl System. Automotive Ethernet is used for:\nSoftware Component\nSignals Provided\nSignals Consumed\nSensorInterface\nVehicleSpeed, EngineSpeed\nNone\nVehicleControlComponent\nBrakeStatus\nVehicleSpeed, EngineSpeed\nBrakeControlComponent\nNone\nBrakeStatus\nDiagnosticManager\nDiagnosticResponse\nDiagnosticRequest\nCommunicationManager\nDiagnosticRequest\nDiagnosticResponse\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 7 of 13\n",
+    "headings": [
+      {
+        "text": "4.4 Signal Ownership Summary by Software Component",
+        "number": "4.4",
+        "title": "Signal Ownership Summary by Software Component"
+      },
+      {
+        "text": "5. Communication Architecture",
+        "number": "5",
+        "title": "Communication Architecture"
+      },
+      {
+        "text": "5.1 Primary Protocol: Controller Area Network (CAN)",
+        "number": "5.1",
+        "title": "Primary Protocol: Controller Area Network (CAN)"
+      },
+      {
+        "text": "5.2 Secondary Technology: Automotive Ethernet",
+        "number": "5.2",
+        "title": "Secondary Technology: Automotive Ethernet"
+      }
+    ]
+  },
+  {
+    "page": 8,
+    "text": "high-bandwidth service-oriented communication\ncalibration\nengineering flashing\nAutomotive Ethernet is not the primary transport mechanism for any of the five explicit\nHLD signals.\n5.3 Role of CommunicationManager\nCommunicationManager provides communication transport services for CAN and\nAutomotive Ethernet. CommunicationManager is a Software Component. CAN and\nAutomotive Ethernet are Communication Protocols or technologies, not Software\nComponents.\n5.4 Protocol Summary\n5.5 Out-of-Scope Communication Details\nThe following are not specified in this HLD:\nEthernet frame layouts\nIP addresses\nVLAN assignments\nSOME/IP service IDs\nCAN message identifiers and signal encodings\nThe SOME/IP service ID is not specified in this HLD.\nItem\nValue\nPrimary Protocol\nCAN\nPrimary Protocol Scope\nAll five explicit HLD signals\nSecondary Technology\nAutomotive Ethernet\nSecondary Technology Uses\nHigh-bandwidth service-oriented communication,\ncalibration, engineering flashing\nTransport Service Provider\nCommunicationManager\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 8 of 13\n",
+    "headings": [
+      {
+        "text": "5.3 Role of CommunicationManager",
+        "number": "5.3",
+        "title": "Role of CommunicationManager"
+      },
+      {
+        "text": "5.4 Protocol Summary",
+        "number": "5.4",
+        "title": "Protocol Summary"
+      },
+      {
+        "text": "5.5 Out-of-Scope Communication Details",
+        "number": "5.5",
+        "title": "Out-of-Scope Communication Details"
+      }
+    ]
+  },
+  {
+    "page": 9,
+    "text": "6. End-to-End Data Flows and Dependency Summary\n6.1 Primary Control Data Flow\nThe primary control flow is:\nSensorInterface → VehicleSpeed / EngineSpeed → VehicleControlComponent →\nBrakeStatus → BrakeControlComponent\n1. SensorInterface acquires and normalizes vehicle sensor information.\n2. SensorInterface provides VehicleSpeed and EngineSpeed to\nVehicleControlComponent through VehicleDataInterface.\n3. VehicleControlComponent consumes VehicleSpeed and EngineSpeed.\n4. VehicleControlComponent calculates vehicle control state.\n5. VehicleControlComponent provides BrakeStatus to BrakeControlComponent through\nBrakeStatusInterface.\n6. BrakeControlComponent consumes BrakeStatus for vehicle deceleration actuation.\nCAN is the primary communication protocol for VehicleSpeed, EngineSpeed, and\nBrakeStatus.\n6.2 Diagnostic Data Flow\nThe diagnostic flow is:\nCommunicationManager → DiagnosticRequest → DiagnosticManager →\nDiagnosticResponse → CommunicationManager\n1. CommunicationManager receives an external diagnostic request.\n2. CommunicationManager provides DiagnosticRequest to DiagnosticManager through\nDiagnosticInterface.\n3. DiagnosticManager processes the request.\n4. DiagnosticManager provides DiagnosticResponse to CommunicationManager through\nDiagnosticInterface.\n5. CommunicationManager consumes DiagnosticResponse and performs transport of\nthe response.\nCAN is the primary communication protocol for DiagnosticRequest and\nDiagnosticResponse.\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 9 of 13\n",
+    "headings": [
+      {
+        "text": "6. End-to-End Data Flows and Dependency Summary",
+        "number": "6",
+        "title": "End-to-End Data Flows and Dependency Summary"
+      },
+      {
+        "text": "6.1 Primary Control Data Flow",
+        "number": "6.1",
+        "title": "Primary Control Data Flow"
+      },
+      {
+        "text": "6.2 Diagnostic Data Flow",
+        "number": "6.2",
+        "title": "Diagnostic Data Flow"
+      }
+    ]
+  },
+  {
+    "page": 10,
+    "text": "6.3 Dependency Summary\nThe dependency direction in the Provides To column and the Depends On column is\nderived from Section 4.3. Section 4.3 remains authoritative.\n7. Diagnostic Architecture and Explicit Out-of-Scope Boundary\nThis section is the authoritative source for diagnostic scope boundaries in VH-GW-\nHLD-002.\n7.1 Diagnostic Architecture\nThe diagnostic architecture uses two Software Components:\nDiagnosticManager processes diagnostic requests and generates diagnostic\nresponses.\nCommunicationManager receives external diagnostic requests and transports\ndiagnostic responses.\nThe two Software Components communicate through DiagnosticInterface.\nDiagnosticInterface uses a Client-Server / Sender-Receiver hybrid communication\npattern and contains DiagnosticRequest and DiagnosticResponse.\nCommunicationManager provides DiagnosticRequest to DiagnosticManager.\nDiagnosticManager provides DiagnosticResponse to CommunicationManager.\nNo additional diagnostic components are defined in this HLD.\n7.2 Diagnostic Protocol and Transport\nThe HLD specifies:\nUDS over CAN\nISO 15765-2 as the CAN transport standard\nSoftware Component\nDepends On (Consumes From)\nProvides To\nSensorInterface\nNone\nVehicleControlComponent\nVehicleControlComponent\nSensorInterface\nBrakeControlComponent\nBrakeControlComponent\nVehicleControlComponent\nNone\nDiagnosticManager\nCommunicationManager\nCommunicationManager\nCommunicationManager\nDiagnosticManager\nDiagnosticManager\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 10 of 13\n",
+    "headings": [
+      {
+        "text": "6.3 Dependency Summary",
+        "number": "6.3",
+        "title": "Dependency Summary"
+      },
+      {
+        "text": "7. Diagnostic Architecture and Explicit Out-of-Scope Boundary",
+        "number": "7",
+        "title": "Diagnostic Architecture and Explicit Out-of-Scope Boundary"
+      },
+      {
+        "text": "7.1 Diagnostic Architecture",
+        "number": "7.1",
+        "title": "Diagnostic Architecture"
+      },
+      {
+        "text": "7.2 Diagnostic Protocol and Transport",
+        "number": "7.2",
+        "title": "Diagnostic Protocol and Transport"
+      }
+    ]
+  },
+  {
+    "page": 11,
+    "text": "7.3 Diagnostic Scope Boundary\nSpecific UDS service IDs, DIDs, ECU addresses, and NRCs are not specified in this HLD.\n7.4 Scope Boundary Statements\nThe UDS service ID for reading a DTC is not specified in this HLD.\nThe ECU address used for DiagnosticManager is not specified in this HLD.\nThe NRC returned for an unsupported diagnostic request is not specified in this HLD.\nThe SOME/IP service ID is not specified in this HLD.\nA question about any detail listed in this section must be answered with: not specified in\nthe HLD.\n8. Architecture Constraints and RAG Traceability\n8.1 Architecture Constraints\nDiagnostic Detail\nStatus in this HLD\nUDS service IDs\nNot specified in this HLD\nData Identifiers (DIDs)\nNot specified in this HLD\nECU physical addresses\nNot specified in this HLD\nECU functional addresses\nNot specified in this HLD\nNegative Response Codes (NRCs)\nNot specified in this HLD\nID\nConstraint\nC-01\nThe system contains exactly five primary Software\nComponents\nC-02\nThe system contains exactly three primary\nInterfaces\nC-03\nThe system contains exactly five explicit Signals\nC-04\nThe system contains exactly six Port mappings\nC-05\nCAN is the primary communication protocol for all\nfive explicit HLD signals\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 11 of 13\n",
+    "headings": [
+      {
+        "text": "7.3 Diagnostic Scope Boundary",
+        "number": "7.3",
+        "title": "Diagnostic Scope Boundary"
+      },
+      {
+        "text": "7.4 Scope Boundary Statements",
+        "number": "7.4",
+        "title": "Scope Boundary Statements"
+      },
+      {
+        "text": "8. Architecture Constraints and RAG Traceability",
+        "number": "8",
+        "title": "Architecture Constraints and RAG Traceability"
+      },
+      {
+        "text": "8.1 Architecture Constraints",
+        "number": "8.1",
+        "title": "Architecture Constraints"
+      }
+    ]
+  },
+  {
+    "page": 12,
+    "text": "8.2 RAG Traceability: Authoritative Sections\n8.3 Question Traceability\nID\nConstraint\nC-06\nAutomotive Ethernet is the secondary\ncommunication technology\nC-07\nSignal provider and consumer relationships are\ndefined only in Section 4.3\nC-08\nDiagnostic scope boundaries are defined only in\nSection 7\nC-09\nNo additional Software Components, Interfaces, or\nSignals are defined\nTopic\nAuthoritative Section\nDocument identity and terminology\nSection 1\nSoftware Component responsibilities\nSection 2.2\nPort mapping\nSection 3.2\nInterface definitions\nSection 4.1\nSignal provider and consumer relationships\nSection 4.3\nPrimary and secondary communication\ntechnologies\nSection 5\nControl data flow\nSection 6.1\nDiagnostic data flow\nSection 6.2\nDiagnostic scope boundaries\nSection 7\nQuestion\nAnswer\nEvidence\nSection\nWhich component provides\nVehicleSpeed?\nSensorInterface\n4.3\nWhich component consumes\nVehicleSpeed?\nVehicleControlComponent\n4.3\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 12 of 13\n",
+    "headings": [
+      {
+        "text": "8.2 RAG Traceability: Authoritative Sections",
+        "number": "8.2",
+        "title": "RAG Traceability: Authoritative Sections"
+      },
+      {
+        "text": "8.3 Question Traceability",
+        "number": "8.3",
+        "title": "Question Traceability"
+      }
+    ]
+  },
+  {
+    "page": 13,
+    "text": "8.4 Document End\nEnd of VH-GW-HLD-002, Version 2.0.\nQuestion\nAnswer\nEvidence\nSection\nWhat interface contains\nVehicleSpeed?\nVehicleDataInterface\n4.1.1\nWhich component provides\nBrakeStatus?\nVehicleControlComponent\n4.3\nWhich component consumes\nBrakeStatus?\nBrakeControlComponent\n4.3\nWhich communication protocol is\nprimary for the explicit HLD signals?\nCAN\n5.1\nWhat is the relationship between\nDiagnosticManager and\nCommunicationManager?\nThey communicate through\nDiagnosticInterface.\nCommunicationManager provides\nDiagnosticRequest to\nDiagnosticManager, and\nDiagnosticManager provides\nDiagnosticResponse to\nCommunicationManager\n4.3, 7.1\nWhich component provides\nDiagnosticResponse?\nDiagnosticManager\n4.3\nWhat is the UDS service ID for\nreading a DTC?\nNot specified in the HLD\n7.3, 7.4\nWhat is the ECU address used for\nDiagnosticManager?\nNot specified in the HLD\n7.3, 7.4\nWhat NRC is returned for an\nunsupported diagnostic request?\nNot specified in the HLD\n7.3, 7.4\nWhat is the exact SOME/IP service\nID?\nNot specified in the HLD\n5.5, 7.4\nVH-GW-HLD-002 Vehicle Gateway Control System HLD v2.0\nPage 13 of 13\n",
+    "headings": [
+      {
+        "text": "8.4 Document End",
+        "number": "8.4",
+        "title": "Document End"
+      }
+    ]
+  }
+]
